@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IN-EXP WALLET | แอปพลิเคชันจัดการการเงิน</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0B47A0;
+            --secondary: #3B82F6;
+            --gold: #FCD34D;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
+        
+        /* Navbar */
+        nav { background: var(--primary); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100;}
+        nav h1 { font-weight: 800; color: var(--gold); }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav a { color: white; text-decoration: none; font-weight: 600; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 6rem 5%; text-align: center; }
+        .hero h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .btn-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; border: none; font-size: 1rem;}
+        .btn-android { background: var(--gold); color: var(--dark); }
+        .btn-android:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(252, 211, 77, 0.3); }
+        .btn-ios { background: white; color: var(--primary); }
+        .btn-ios:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2); }
+
+        /* Sections */
+        section { padding: 5rem 5%; max-width: 1200px; margin: auto; }
+        h3 { text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 3rem; font-weight: 800; }
+        
+        /* Features */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;}
+        .card:hover { transform: translateY(-5px); }
+        .card .icon { font-size: 3rem; margin-bottom: 1rem; }
+        .card h4 { color: var(--primary); margin-bottom: 0.5rem; }
+
+        /* Tech Stack */
+        .tech-stack { text-align: center; }
+        .tech-tags { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;}
+        .tag { background: #E2E8F0; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; color: var(--primary);}
+
+        /* iOS Modal (Popup) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
+        .modal-content h4 { color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem; }
+        .modal-content p { text-align: left; margin-bottom: 1rem; }
+        .modal-close { background: var(--dark); color: white; padding: 0.5rem 1.5rem; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+
+        /* Footer */
+        footer { background: var(--dark); color: white; padding: 3rem 5%; text-align: center; }
+        .creators { margin: 1.5rem 0; font-size: 0.9rem; color: #94A3B8;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>IN-EXP WALLET</h1>
+        <ul style="display: flex; gap: 1rem;">
+            <li><a href="#features">วิธีใช้งาน</a></li>
+            <li><a href="#tech">เทคโนโลยี</a></li>
+            <li><a href="#contact">ติดต่อเรา</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <h2>จัดการการเงินอย่างชาญฉลาดในทุกๆ วัน</h2>
+        <p>แอปพลิเคชันบันทึกรายรับ-รายจ่าย ที่มาพร้อมระบบ AI สแกนสลิปอัตโนมัติ ใช้งานง่าย ดีไซน์ทันสมัย</p>
+        <div class="btn-group">
+            <!-- 💡 เปลี่ยนลิงก์ให้ชี้ไปที่ไฟล์ APK ในโฟลเดอร์เดียวกัน -->
+            <a href="app-release.apk" class="btn btn-android" download>
+                📥 ดาวน์โหลด APK (Android)
+            </a>
+            <!-- 💡 ปุ่ม iOS จะกดแล้วเปิด Popup แนะนำวิธีติดตั้ง -->
+            <button onclick="document.getElementById('iosModal').style.display='flex'" class="btn btn-ios">
+                🍎 ติดตั้งบน iOS (ฟรี)
+            </button>
+        </div>
+    </header>
+
+    <section id="features">
+        <h3>แอปใช้งานยังไง?</h3>
+        <div class="features">
+            <div class="card">
+                <div class="icon">📸</div>
+                <h4>สแกนสลิปด้วย AI</h4>
+                <p>ไม่ต้องพิมพ์ยอดเงินเองให้เมื่อยมือ แค่เลือกรูปสลิปโอนเงิน ระบบจะอ่านยอดเงินและเวลาให้อัตโนมัติ</p>
+            </div>
+            <div class="card">
+                <div class="icon">📅</div>
+                <h4>ปฏิทินรายวัน</h4>
+                <p>ดูสรุปยอดรายรับ-รายจ่ายผ่านมุมมองปฏิทินที่ดูง่าย พร้อมสรุปยอดสุทธิรายวันชัดเจน</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔐</div>
+                <h4>ปลอดภัยด้วย PIN</h4>
+                <p>ล็อกแอปพลิเคชันด้วยรหัส PIN 6 หลัก ปกป้องข้อมูลทางการเงินของคุณไม่ให้ใครแอบดู</p>
+            </div>
+            <div class="card">
+                <div class="icon">🌙</div>
+                <h4>รองรับโหมดมืด</h4>
+                <p>ถนอมสายตาด้วย Dark Mode ที่ออกแบบมาอย่างสวยงาม สลับใช้งานได้ตลอดเวลา</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" style="background: white;">
+        <h3>แอปนี้ทำมาจากอะไร?</h3>
+        <div class="tech-stack">
+            <p>แอปพลิเคชันถูกพัฒนาขึ้นด้วยเทคโนโลยีสมัยใหม่ เพื่อประสิทธิภาพและความปลอดภัยสูงสุด</p>
+            <div class="tech-tags">
+                <span class="tag">Flutter (Dart)</span>
+                <span class="tag">Supabase (Database & Storage)</span>
+                <span class="tag">Google ML Kit (AI Text Recognition)</span>
+                <span class="tag">Provider (State Management)</span>
+                <span class="tag">PWA (Progressive Web App)</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>ช่องทางการติดต่อ</h2>
+        <p style="margin-top: 1rem; color: var(--gold);">LINE Official: @inexpsupport</p>
+        <p>Email: inandexp.admin@gmail.com</p>
+        
+        <div class="creators">
+            <p><strong>👨‍💻 ผู้จัดทำและพัฒนา:</strong></p>
+            <p>นางสาวสุกัญญา อินจันทร์</p>
+            <p>นางสาวหยาดนรินทร์ เพชรนิล</p>
+            <p>นางสาววรางคณา โฉมศรี</p>
+            <p style="margin-top: 5px;">(นักศึกษาสาขาเทคโนโลยีธุรกิจดิจิทัล ปวส. 1/1)</p>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 2rem;">&copy; 2026 IN-EXP WALLET. All rights reserved.</p>
+    </footer>
+
+    <!-- Popup แนะนำวิธีลง iOS -->
+    <div id="iosModal" class="modal">
+        <div class="modal-content">
+            <h4>การติดตั้งบน iOS (iPhone/iPad)</h4>
+            <p>เนื่องจากข้อจำกัดของ Apple คุณสามารถติดตั้งแอปนี้ได้ฟรีผ่านระบบ Web App (PWA) โดยทำตามขั้นตอนนี้:</p>
+            <ol style="text-align: left; padding-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                <!-- 💡 ตรงคำว่า [ลิงก์เว็บแอป] คุณต้องเอาลิงก์ Flutter Web ของคุณมาใส่ทีหลังครับ -->
+                <li style="margin-bottom: 8px;">เปิด <a href="#" style="color: var(--secondary);">[คลิกที่นี่เพื่อเปิดเว็บแอป]</a> ผ่านแอป <strong>Safari</strong></li>
+                <li style="margin-bottom: 8px;">แตะไอคอน <strong>"แชร์" (Share)</strong> ที่แถบด้านล่างของหน้าจอ</li>
+                <li style="margin-bottom: 8px;">เลือก <strong>"เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)</strong></li>
+                <li>แอป IN-EXP WALLET จะไปปรากฏบนหน้าจอหลักของคุณ!</li>
+            </ol>
+            <button onclick="document.getElementById('iosModal').style.display='none'" class="modal-close">เข้าใจแล้ว</button>
+        </div>
+    </div>
+
+</body>
+</html>
