@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IN-EXP WALLET | แอปพลิเคชันจัดการการเงิน</title>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- SEO -->
+    <meta name="description" content="IN-EXP WALLET แอปบันทึกรายรับ-รายจ่ายพร้อมระบบ AI สแกนสลิปอัตโนมัติ ปฏิทินสรุปยอดรายวัน ล็อกด้วย PIN และรองรับ Dark Mode ดาวน์โหลดฟรีทั้ง Android และ iOS">
+
+    <!-- Open Graph (สำหรับแชร์ลิงก์ใน LINE / Facebook) -->
+    <meta property="og:title" content="IN-EXP WALLET | จัดการการเงินอย่างชาญฉลาด">
+    <meta property="og:description" content="แอปบันทึกรายรับ-รายจ่ายที่มาพร้อมระบบ AI สแกนสลิปอัตโนมัติ ใช้งานง่าย ดีไซน์ทันสมัย">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lambent-pony-340a31.netlify.app/og-image.png">
+    <meta property="og:url" content="https://lambent-pony-340a31.netlify.app/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #0B47A0;
@@ -15,57 +29,81 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
         body { background-color: var(--light); color: var(--dark); line-height: 1.6; }
-        
+        a { -webkit-tap-highlight-color: transparent; }
+
         /* Navbar */
-        nav { background: var(--primary); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100;}
-        nav h1 { font-weight: 800; color: var(--gold); }
+        nav { background: var(--primary); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 100; }
+        nav h1 { font-weight: 800; color: var(--gold); font-size: 1.3rem; }
         nav ul { list-style: none; display: flex; gap: 1.5rem; }
         nav a { color: white; text-decoration: none; font-weight: 600; }
+
+        /* Mobile hamburger */
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer; }
 
         /* Hero Section */
         .hero { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 6rem 5%; text-align: center; }
         .hero h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
         .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
         .btn-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; border: none; font-size: 1rem;}
+        .btn { padding: 0.8rem 2rem; border-radius: 50px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; cursor: pointer; border: none; font-size: 1rem; }
         .btn-android { background: var(--gold); color: var(--dark); }
         .btn-android:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(252, 211, 77, 0.3); }
         .btn-ios { background: white; color: var(--primary); }
         .btn-ios:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2); }
+        .install-note { margin-top: 1rem; font-size: 0.85rem; opacity: 0.85; }
 
         /* Sections */
         section { padding: 5rem 5%; max-width: 1200px; margin: auto; }
         h3 { text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 3rem; font-weight: 800; }
-        
+
         /* Features */
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;}
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); }
         .card .icon { font-size: 3rem; margin-bottom: 1rem; }
         .card h4 { color: var(--primary); margin-bottom: 0.5rem; }
 
         /* Tech Stack */
         .tech-stack { text-align: center; }
-        .tech-tags { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;}
-        .tag { background: #E2E8F0; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; color: var(--primary);}
+        .tech-tags { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .tag { background: #E2E8F0; padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: 600; color: var(--primary); }
 
         /* iOS Modal (Popup) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 400px; width: 90%; text-align: center; position: relative; }
         .modal-content h4 { color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem; }
         .modal-content p { text-align: left; margin-bottom: 1rem; }
         .modal-close { background: var(--dark); color: white; padding: 0.5rem 1.5rem; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; }
+        .modal-x { position: absolute; top: 0.8rem; right: 1rem; background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #94A3B8; }
 
         /* Footer */
         footer { background: var(--dark); color: white; padding: 3rem 5%; text-align: center; }
-        .creators { margin: 1.5rem 0; font-size: 0.9rem; color: #94A3B8;}
+        .creators { margin: 1.5rem 0; font-size: 0.9rem; color: #94A3B8; }
+        footer a { color: var(--gold); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            nav ul { position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); flex-direction: column; gap: 0; display: none; }
+            nav ul.open { display: flex; }
+            nav ul li { border-top: 1px solid rgba(255,255,255,0.1); }
+            nav ul a { display: block; padding: 1rem 5%; }
+            .nav-toggle { display: block; }
+
+            .hero { padding: 4rem 5%; }
+            .hero h2 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+
+            section { padding: 3rem 5%; }
+            h3 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <h1>IN-EXP WALLET</h1>
-        <ul style="display: flex; gap: 1rem;">
+        <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navMenu">☰</button>
+        <ul id="navMenu">
             <li><a href="#features">วิธีใช้งาน</a></li>
             <li><a href="#tech">เทคโนโลยี</a></li>
             <li><a href="#contact">ติดต่อเรา</a></li>
@@ -76,15 +114,15 @@
         <h2>จัดการการเงินอย่างชาญฉลาดในทุกๆ วัน</h2>
         <p>แอปพลิเคชันบันทึกรายรับ-รายจ่าย ที่มาพร้อมระบบ AI สแกนสลิปอัตโนมัติ ใช้งานง่าย ดีไซน์ทันสมัย</p>
         <div class="btn-group">
-            <!-- 💡 เปลี่ยนลิงก์ให้ชี้ไปที่ไฟล์ APK ในโฟลเดอร์เดียวกัน -->
-            <a href="https://github.com/sukanyaainchan-creator/inexp-wallet-web/releases/download/v1.0.0/app-release.apk" class="btn btn-android" download>
+            <a href="https://github.com/sukanyaainchan-creator/inexp-wallet-web/releases/download/v1.0.0/app-release.apk"
+               class="btn btn-android" download aria-label="ดาวน์โหลดไฟล์ APK สำหรับ Android">
                 📥 ดาวน์โหลด APK (Android)
             </a>
-            <!-- 💡 ปุ่ม iOS จะกดแล้วเปิด Popup แนะนำวิธีติดตั้ง -->
-            <button onclick="document.getElementById('iosModal').style.display='flex'" class="btn btn-ios">
+            <button onclick="openIosModal()" class="btn btn-ios" aria-label="ดูวิธีติดตั้งบน iOS">
                 🍎 ติดตั้งบน iOS (ฟรี)
             </button>
         </div>
+        <p class="install-note">⚠️ เมื่อติดตั้ง APK เครื่องอาจแจ้งเตือนให้อนุญาต "แหล่งที่ไม่รู้จัก" (Unknown sources) กด "อนุญาต" เพื่อดำเนินการติดตั้งต่อได้อย่างปลอดภัย</p>
     </header>
 
     <section id="features">
@@ -130,8 +168,8 @@
     <footer id="contact">
         <h2>ช่องทางการติดต่อ</h2>
         <p style="margin-top: 1rem; color: var(--gold);">LINE Official: @inexpsupport</p>
-        <p>Email: inandexp.admin@gmail.com</p>
-        
+        <p>Email: <a href="mailto:inandexp.admin@gmail.com">inandexp.admin[at]gmail.com</a></p>
+
         <div class="creators">
             <p><strong>👨‍💻 ผู้จัดทำและพัฒนา:</strong></p>
             <p>นางสาวสุกัญญา อินจันทร์</p>
@@ -145,18 +183,49 @@
     <!-- Popup แนะนำวิธีลง iOS -->
     <div id="iosModal" class="modal">
         <div class="modal-content">
+            <button class="modal-x" onclick="closeIosModal()" aria-label="ปิดหน้าต่าง">✕</button>
             <h4>การติดตั้งบน iOS (iPhone/iPad)</h4>
             <p>เนื่องจากข้อจำกัดของ Apple คุณสามารถติดตั้งแอปนี้ได้ฟรีผ่านระบบ Web App (PWA) โดยทำตามขั้นตอนนี้:</p>
             <ol style="text-align: left; padding-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
-                <!-- 💡 ตรงคำว่า [ลิงก์เว็บแอป] คุณต้องเอาลิงก์ Flutter Web ของคุณมาใส่ทีหลังครับ -->
-                <li style="margin-bottom: 8px;">เปิด <a href="https://lambent-pony-340a31.netlify.app/" style="color: var(--secondary);">[คลิกที่นี่เพื่อเปิดเว็บแอป]</a> ผ่านแอป <strong>Safari</strong></li>
+                <li style="margin-bottom: 8px;">เปิด <a href="https://lambent-pony-340a31.netlify.app/" style="color: var(--secondary);">เว็บแอป IN-EXP WALLET</a> ผ่านแอป <strong>Safari</strong></li>
                 <li style="margin-bottom: 8px;">แตะไอคอน <strong>"แชร์" (Share)</strong> ที่แถบด้านล่างของหน้าจอ</li>
                 <li style="margin-bottom: 8px;">เลือก <strong>"เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)</strong></li>
                 <li>แอป IN-EXP WALLET จะไปปรากฏบนหน้าจอหลักของคุณ!</li>
             </ol>
-            <button onclick="document.getElementById('iosModal').style.display='none'" class="modal-close">เข้าใจแล้ว</button>
+            <button onclick="closeIosModal()" class="modal-close">เข้าใจแล้ว</button>
         </div>
     </div>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navMenu.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // iOS modal open/close (click outside + Esc key + close button)
+        const iosModal = document.getElementById('iosModal');
+        function openIosModal() {
+            iosModal.style.display = 'flex';
+        }
+        function closeIosModal() {
+            iosModal.style.display = 'none';
+        }
+        iosModal.addEventListener('click', (e) => {
+            if (e.target === iosModal) closeIosModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && iosModal.style.display === 'flex') closeIosModal();
+        });
+    </script>
 
 </body>
 </html>
