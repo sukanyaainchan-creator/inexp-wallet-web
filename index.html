@@ -6,7 +6,7 @@
     <title>IN-EXP WALLET | แอปพลิเคชันจัดการการเงิน</title>
 
     <!-- SEO -->
-    <meta name="description" content="IN-EXP WALLET แอปบันทึกรายรับ-รายจ่ายพร้อมระบบ AI สแกนสลิปอัตโนมัติ ปฏิทินสรุปยอดรายวัน ล็อกด้วย PIN และรองรับ Dark Mode ดาวน์โหลดฟรีทั้ง Android และ iOS">
+    <meta name="description" content="IN-EXP WALLET แอปบันทึกรายรับ-รายจ่ายพร้อมระบบ AI สแกนสลิปอัตโนมัติ ปฏิทินสรุปยอดรายวัน ล็อกด้วย PIN และรองรับ Dark Mode ดาวน์โหลดฟรีสำหรับ Android">
 
     <!-- Open Graph -->
     <meta property="og:title" content="IN-EXP WALLET | จัดการการเงินอย่างชาญฉลาด">
@@ -92,8 +92,6 @@
         }
         .btn-android { background: var(--accent); color: var(--dark); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); }
         .btn-android:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6); }
-        .btn-ios { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.3); backdrop-filter: blur(10px); }
-        .btn-ios:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-3px); border-color: white; }
         
         .install-note { margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); position: relative; z-index: 2; }
 
@@ -146,18 +144,6 @@
         }
         .tag:hover { background: var(--secondary); color: white; transform: translateY(-2px); }
 
-        /* iOS Modal (Popup) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.6); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; opacity: 0; animation: fadeIn 0.3s forwards; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        .modal-content { background: white; padding: 2.5rem; border-radius: 24px; max-width: 420px; width: 100%; text-align: center; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transform: translateY(20px); animation: slideUp 0.3s forwards; }
-        @keyframes slideUp { to { transform: translateY(0); } }
-        .modal-content h4 { color: var(--dark); font-size: 1.4rem; margin-bottom: 1.2rem; font-weight: 800; }
-        .modal-content p { text-align: left; margin-bottom: 1rem; color: var(--text-gray); }
-        .modal-close { background: var(--dark); color: white; padding: 0.8rem 2rem; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; margin-top: 1rem; transition: 0.3s; width: 100%; }
-        .modal-close:hover { background: var(--secondary); }
-        .modal-x { position: absolute; top: 1rem; right: 1.2rem; background: #F1F5F9; border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; color: #64748B; transition: 0.3s; }
-        .modal-x:hover { background: #E2E8F0; color: var(--dark); }
-
         /* Footer */
         footer { background: var(--dark); color: white; padding: 4rem 5% 2rem; text-align: center; border-top: 5px solid var(--secondary); }
         footer h2 { font-size: 1.8rem; margin-bottom: 1rem; }
@@ -201,9 +187,6 @@
                class="btn btn-android" download aria-label="ดาวน์โหลดไฟล์ APK สำหรับ Android">
                 📥 ดาวน์โหลด APK (Android)
             </a>
-            <button onclick="openIosModal()" class="btn btn-ios" aria-label="ดูวิธีติดตั้งบน iOS">
-                🍎 ติดตั้งบน iOS (ฟรี)
-            </button>
         </div>
         <p class="install-note">⚠️ หากเครื่องแจ้งเตือน "แหล่งที่ไม่รู้จัก" (Unknown sources) ให้อนุญาตเพื่อดำเนินการติดตั้งอย่างปลอดภัย</p>
     </header>
@@ -268,22 +251,6 @@
         <p style="font-size: 0.8rem; margin-top: 2rem; color: #64748B;">&copy; 2026 IN-EXP WALLET. All rights reserved.</p>
     </footer>
 
-    <!-- Popup แนะนำวิธีลง iOS -->
-    <div id="iosModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-x" onclick="closeIosModal()" aria-label="ปิดหน้าต่าง">✕</button>
-            <h4>ติดตั้งบน iOS (iPhone/iPad)</h4>
-            <p>เนื่องจากข้อจำกัดของระบบ คุณสามารถติดตั้งแอปนี้ได้ฟรีผ่าน Web App (PWA) โดยทำตามขั้นตอนนี้:</p>
-            <ol style="text-align: left; padding-left: 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem; color: var(--text-gray);">
-                <li style="margin-bottom: 10px;">เปิด <a href="https://lambent-pony-340a31.netlify.app/" style="color: var(--secondary); font-weight: 600;">เว็บแอป IN-EXP WALLET</a> ผ่านเบราว์เซอร์ <strong>Safari</strong></li>
-                <li style="margin-bottom: 10px;">แตะไอคอน <strong>"แชร์" (Share)</strong> ที่แถบด้านล่างของหน้าจอ</li>
-                <li style="margin-bottom: 10px;">เลือก <strong>"เพิ่มไปยังหน้าจอโฮม" (Add to Home Screen)</strong></li>
-                <li>แอป IN-EXP WALLET จะไปปรากฏบนหน้าจอหลักของคุณพร้อมใช้งานทันที!</li>
-            </ol>
-            <button onclick="closeIosModal()" class="modal-close">เข้าใจแล้ว</button>
-        </div>
-    </div>
-
     <script>
         // Mobile nav toggle
         const navToggle = document.getElementById('navToggle');
@@ -298,13 +265,6 @@
                 navToggle.setAttribute('aria-expanded', 'false');
             });
         });
-
-        // iOS modal logic
-        const iosModal = document.getElementById('iosModal');
-        function openIosModal() { iosModal.style.display = 'flex'; }
-        function closeIosModal() { iosModal.style.display = 'none'; }
-        iosModal.addEventListener('click', (e) => { if (e.target === iosModal) closeIosModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && iosModal.style.display === 'flex') closeIosModal(); });
     </script>
 
 </body>
