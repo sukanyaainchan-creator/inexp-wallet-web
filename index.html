@@ -6,7 +6,7 @@
     <title>IN-EXP WALLET | แอปพลิเคชันจัดการการเงิน</title>
 
     <!-- SEO -->
-    <meta name="description" content="IN-EXP WALLET แอปบันทึกรายรับ-รายจ่ายพร้อมระบบ AI สแกนสลิปอัตโนมัติ ปฏิทินสรุปยอดรายวัน ล็อกด้วย PIN และรองรับ Dark Mode ดาวน์โหลดฟรีสำหรับ Android">
+    <meta name="description" content="IN-EXP WALLET แอปบันทึกรายรับ-รายจ่ายพร้อมระบบ AI สแกนสลิปอัตโนมัติ ปฏิทินสรุปยอดรายวัน ล็อกด้วย PIN และรองรับ Dark Mode ดาวน์โหลดฟรีสำหรับ Android พร้อมคู่มือการใช้งาน">
 
     <!-- Open Graph -->
     <meta property="og:title" content="IN-EXP WALLET | จัดการการเงินอย่างชาญฉลาด">
@@ -21,127 +21,139 @@
 
     <style>
         :root {
-            /* ปรับโทนสีให้เป็น Modern Blue (ดูน่าเชื่อถือและคลีน) */
-            --primary: #1E3A8A; /* Deep Blue (น้ำเงินเข้ม) */
-            --secondary: #2563EB; /* Bright Blue (น้ำเงินสว่าง) */
-            --accent: #FBBF24; /* Modern Gold (สีทอง) */
+            --primary: #1E3A8A;
+            --secondary: #2563EB;
+            --sky: #38BDF8;
+            --accent: #FBBF24;
             --dark: #0F172A;
             --light: #F8FAFC;
             --text-gray: #64748B;
+            --line: #E2E8F0;
         }
-        
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Prompt', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background-color: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        body { background-color: var(--light); color: var(--dark); line-height: 1.7; overflow-x: hidden; }
         a { -webkit-tap-highlight-color: transparent; }
 
-        /* Navbar - Glassmorphism */
-        nav { 
-            background: rgba(15, 23, 42, 0.85); 
+        /* Navbar */
+        nav {
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            padding: 1rem 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         nav h1 { font-weight: 800; background: linear-gradient(to right, #FBBF24, #FDE68A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem; letter-spacing: 1px; }
-        nav ul { list-style: none; display: flex; gap: 2rem; }
+        nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
         nav a { color: #E2E8F0; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
-
+        nav a.nav-cta { background: var(--accent); color: var(--dark); padding: 0.45rem 1.1rem; border-radius: 50px; }
+        nav a.nav-cta:hover { color: var(--dark); filter: brightness(1.08); }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.6rem; cursor: pointer; }
 
-        /* Hero Section - Modern Gradient (Blue to Sky) */
-        .hero { 
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #38BDF8 100%);
-            color: white; 
-            padding: 7rem 5%; 
-            text-align: center; 
-            position: relative;
-            overflow: hidden;
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--sky) 100%);
+            color: white; padding: 6rem 5% 7rem; position: relative; overflow: hidden;
         }
-        /* ของตกแต่งพื้นหลัง */
-        .hero::before {
-            content: ''; position: absolute; top: -50px; left: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(40px);
-        }
-        .hero::after {
-            content: ''; position: absolute; bottom: -50px; right: -50px; width: 300px; height: 300px; background: rgba(14, 165, 233, 0.3); border-radius: 50%; filter: blur(50px);
-        }
-        
-        .hero h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.2; position: relative; z-index: 2; text-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .hero p { font-size: 1.15rem; margin-bottom: 2.5rem; color: #E0F2FE; font-weight: 300; max-width: 600px; margin-inline: auto; position: relative; z-index: 2; }
-        
-        .btn-group { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; position: relative; z-index: 2; }
-        .btn { 
-            padding: 0.9rem 2.2rem; 
-            border-radius: 50px; 
-            font-weight: 600; 
-            text-decoration: none; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 10px; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; 
-            border: none; 
-            font-size: 1rem; 
-        }
-        .btn-android { background: var(--accent); color: var(--dark); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); }
-        .btn-android:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6); }
-        
-        .install-note { margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); position: relative; z-index: 2; }
+        .hero::before { content: ''; position: absolute; top: -60px; left: -60px; width: 260px; height: 260px; background: rgba(255,255,255,0.12); border-radius: 50%; filter: blur(40px); }
+        .hero::after { content: ''; position: absolute; bottom: -80px; right: -60px; width: 340px; height: 340px; background: rgba(14,165,233,0.35); border-radius: 50%; filter: blur(55px); }
+        .hero-inner { max-width: 1100px; margin: auto; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; position: relative; z-index: 2; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 0.3rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1.2rem; backdrop-filter: blur(6px); }
+        .hero h2 { font-size: 2.9rem; font-weight: 800; margin-bottom: 1.2rem; line-height: 1.25; text-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .hero h2 span { color: var(--accent); }
+        .hero p.lead { font-size: 1.1rem; margin-bottom: 2rem; color: #E0F2FE; font-weight: 300; max-width: 520px; }
+
+        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn { padding: 0.9rem 2.1rem; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); cursor: pointer; border: none; font-size: 1rem; }
+        .btn-android { background: var(--accent); color: var(--dark); box-shadow: 0 4px 15px rgba(251,191,36,0.4); }
+        .btn-android:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 25px rgba(251,191,36,0.6); }
+        .btn-ghost { background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.35); }
+        .btn-ghost:hover { background: rgba(255,255,255,0.22); transform: translateY(-3px); }
+        .install-note { margin-top: 1.4rem; font-size: 0.85rem; color: rgba(255,255,255,0.75); max-width: 520px; }
+
+        /* Phone mockup */
+        .phone-wrap { display: flex; justify-content: center; }
+        .phone { width: 250px; background: #0B1226; border-radius: 38px; padding: 12px; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.08); transform: rotate(4deg); animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: rotate(4deg) translateY(0); } 50% { transform: rotate(4deg) translateY(-12px); } }
+        .screen { background: linear-gradient(180deg, #1D4ED8 0%, #2563EB 35%, #F1F5F9 35%); border-radius: 28px; padding: 1.2rem 1rem 1rem; min-height: 440px; color: white; }
+        .screen .hi { font-size: 0.75rem; opacity: 0.85; }
+        .screen .name { font-weight: 800; font-size: 1.1rem; margin-bottom: 1.3rem; }
+        .bal { background: linear-gradient(135deg, #1E3A8A, #2563EB); border-radius: 18px; padding: 1rem; box-shadow: 0 10px 25px -8px rgba(30,58,138,0.6); }
+        .bal small { opacity: 0.8; font-size: 0.7rem; }
+        .bal strong { display: block; font-size: 1.7rem; font-weight: 800; }
+        .bal .row { display: flex; gap: 8px; margin-top: 0.7rem; }
+        .bal .row div { flex: 1; background: rgba(255,255,255,0.14); border-radius: 10px; padding: 0.35rem 0.5rem; font-size: 0.65rem; }
+        .bal .row b { display: block; font-size: 0.8rem; }
+        .tx { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 8px; }
+        .tx div { background: white; color: var(--dark); border-radius: 12px; padding: 0.55rem 0.7rem; font-size: 0.72rem; display: flex; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .tx .out { color: #EF4444; font-weight: 600; } .tx .in { color: #10B981; font-weight: 600; }
+
+        /* Stats strip */
+        .stats { max-width: 1000px; margin: -3rem auto 0; padding: 0 5%; position: relative; z-index: 5; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .stat { background: white; border-radius: 20px; padding: 1.3rem 1rem; text-align: center; box-shadow: 0 15px 35px -12px rgba(15,23,42,0.18); border: 1px solid var(--line); }
+        .stat b { display: block; font-size: 1.7rem; font-weight: 800; color: var(--secondary); }
+        .stat span { font-size: 0.85rem; color: var(--text-gray); }
 
         /* Sections */
         section { padding: 6rem 5%; max-width: 1200px; margin: auto; }
+        .sec-label { text-align: center; color: var(--secondary); font-weight: 600; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem; }
         h3 { text-align: center; font-size: 2.2rem; color: var(--dark); margin-bottom: 3.5rem; font-weight: 800; position: relative; }
-        h3::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--secondary); border-radius: 2px; }
+        h3::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: linear-gradient(90deg, var(--secondary), var(--accent)); border-radius: 2px; }
 
-        /* Features - Neumorphism/Glass Cards */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; justify-content: center; }
-        .card { 
-            background: white; 
-            padding: 2.5rem 2rem; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06); 
-            text-align: center; 
-            transition: all 0.4s ease; 
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.15); border-color: rgba(37, 99, 235, 0.3); }
-        .card .icon-wrapper { 
-            width: 70px; height: 70px; 
-            background: #EFF6FF; 
-            border-radius: 20px; 
-            display: flex; justify-content: center; align-items: center; 
-            margin: 0 auto 1.5rem; 
-            font-size: 2rem; 
-            color: var(--secondary);
-            transition: 0.3s;
-        }
-        .card:hover .icon-wrapper { background: var(--secondary); color: white; transform: rotate(-5deg) scale(1.1); }
-        .card h4 { color: var(--dark); margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 800; }
+        /* Feature cards */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+        .card { background: white; padding: 2.4rem 2rem; border-radius: 24px; box-shadow: 0 10px 40px -10px rgba(0,0,0,0.06); text-align: center; transition: all 0.4s ease; border: 1px solid rgba(226,232,240,0.8); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(37,99,235,0.18); border-color: rgba(37,99,235,0.3); }
+        .icon-wrapper { width: 70px; height: 70px; background: #EFF6FF; border-radius: 20px; display: flex; justify-content: center; align-items: center; margin: 0 auto 1.5rem; font-size: 2rem; transition: 0.3s; }
+        .card:hover .icon-wrapper { background: var(--secondary); transform: rotate(-5deg) scale(1.1); }
+        .card h4 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 800; }
         .card p { color: var(--text-gray); font-size: 0.95rem; }
 
-        /* Tech Stack */
+        /* ===== Guide ===== */
+        .guide-bg { background: linear-gradient(180deg, #EFF6FF 0%, #F8FAFC 100%); max-width: none; }
+        .guide-wrap { max-width: 1000px; margin: auto; }
+        .tabs { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+        .tab { background: white; border: 1px solid var(--line); color: var(--text-gray); padding: 0.65rem 1.4rem; border-radius: 50px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 0.95rem; }
+        .tab:hover { color: var(--secondary); border-color: var(--secondary); }
+        .tab.active { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-color: transparent; box-shadow: 0 8px 20px -6px rgba(37,99,235,0.5); }
+        .panel { display: none; }
+        .panel.active { display: block; animation: fade 0.45s ease; }
+        @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .timeline { position: relative; padding-left: 0; }
+        .timeline::before { content: ''; position: absolute; left: 27px; top: 10px; bottom: 10px; width: 3px; background: linear-gradient(var(--secondary), var(--sky)); opacity: 0.25; border-radius: 3px; }
+        .step { position: relative; display: flex; gap: 1.5rem; margin-bottom: 1.6rem; }
+        .num { flex: 0 0 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.3rem; box-shadow: 0 8px 20px -6px rgba(37,99,235,0.55); z-index: 2; border: 4px solid #F1F7FF; }
+        .step-body { flex: 1; background: white; border-radius: 22px; padding: 1.6rem 1.8rem; border: 1px solid var(--line); box-shadow: 0 10px 30px -14px rgba(15,23,42,0.12); transition: 0.3s; }
+        .step-body:hover { border-color: rgba(37,99,235,0.35); box-shadow: 0 18px 38px -16px rgba(37,99,235,0.25); }
+        .step-body h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .step-body p { color: var(--text-gray); font-size: 0.97rem; }
+        .step-body p b, .hl { color: var(--secondary); font-weight: 600; }
+        .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
+        .chip { background: #EFF6FF; color: var(--primary); border-radius: 50px; padding: 0.25rem 0.85rem; font-size: 0.82rem; font-weight: 600; }
+        .chip.gold { background: #FEF3C7; color: #92400E; }
+        .tip { margin-top: 0.9rem; background: #FFFBEB; border-left: 4px solid var(--accent); padding: 0.7rem 1rem; border-radius: 0 12px 12px 0; font-size: 0.9rem; color: #78350F; }
+        .shots { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem; }
+        .shots img { height: 260px; width: auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 6px 18px rgba(0,0,0,0.1); cursor: zoom-in; transition: 0.3s; }
+        .shots img:hover { transform: scale(1.03); }
+
+        .lightbox { position: fixed; inset: 0; background: rgba(15,23,42,0.88); display: none; align-items: center; justify-content: center; z-index: 999; padding: 1rem; cursor: zoom-out; }
+        .lightbox.open { display: flex; }
+        .lightbox img { max-height: 92vh; max-width: 92vw; border-radius: 16px; }
+
+        .help-box { margin-top: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: 24px; padding: 1.8rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .help-box h4 { font-size: 1.2rem; font-weight: 800; }
+        .help-box p { color: #DBEAFE; font-size: 0.95rem; }
+
+        /* Tech */
         .tech-stack { text-align: center; max-width: 800px; margin: auto; }
         .tech-stack p { color: var(--text-gray); margin-bottom: 2rem; font-size: 1.1rem; }
         .tech-tags { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .tag { 
-            background: white; 
-            padding: 0.6rem 1.5rem; 
-            border-radius: 50px; 
-            font-weight: 600; 
-            color: var(--secondary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border: 1px solid #E2E8F0;
-            transition: 0.3s;
-        }
+        .tag { background: white; padding: 0.6rem 1.5rem; border-radius: 50px; font-weight: 600; color: var(--secondary); box-shadow: 0 4px 15px rgba(0,0,0,0.04); border: 1px solid var(--line); transition: 0.3s; }
         .tag:hover { background: var(--secondary); color: white; transform: translateY(-2px); }
 
         /* Footer */
@@ -149,22 +161,38 @@
         footer h2 { font-size: 1.8rem; margin-bottom: 1rem; }
         .creators { margin: 2rem auto; font-size: 0.95rem; color: #CBD5E1; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 16px; max-width: 500px; }
         .creators p { margin-bottom: 5px; }
-        footer a { color: var(--accent); text-decoration: none; transition: 0.3s; }
+        footer a { color: var(--accent); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(24px); transition: 0.7s ease; }
+        .reveal.show { opacity: 1; transform: none; }
+
         /* Responsive */
+        @media (max-width: 900px) {
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero p.lead, .install-note { margin-inline: auto; }
+            .btn-group { justify-content: center; }
+            .phone-wrap { margin-top: 1rem; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 768px) {
-            nav ul { position: absolute; top: 100%; left: 0; right: 0; background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(10px); flex-direction: column; gap: 0; display: none; text-align: center; }
-            nav ul.open { display: flex; animation: slideDown 0.3s ease; }
-            @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-            nav ul a { display: block; padding: 1.2rem 5%; border-top: 1px solid rgba(255,255,255,0.05); }
+            nav ul { position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,23,42,0.98); flex-direction: column; gap: 0; display: none; text-align: center; }
+            nav ul.open { display: flex; animation: fade 0.3s ease; }
+            nav ul a { display: block; padding: 1.1rem 5%; border-top: 1px solid rgba(255,255,255,0.05); }
+            nav a.nav-cta { border-radius: 0; background: none; color: var(--accent); padding: 1.1rem 5%; }
             .nav-toggle { display: block; }
-            .hero { padding: 5rem 5%; }
-            .hero h2 { font-size: 2rem; }
-            .hero p { font-size: 1rem; }
+            .hero { padding: 4.5rem 5% 6rem; }
+            .hero h2 { font-size: 2.1rem; }
             h3 { font-size: 1.8rem; }
             .features { grid-template-columns: 1fr; max-width: 400px; margin: auto; }
+            .timeline::before { left: 21px; }
+            .num { flex-basis: 44px; height: 44px; font-size: 1.05rem; }
+            .step { gap: 1rem; }
+            .step-body { padding: 1.2rem; }
+            .shots img { height: 200px; }
         }
+        @media (prefers-reduced-motion: reduce) { .phone { animation: none; } .reveal { opacity: 1; transform: none; } }
     </style>
 </head>
 <body>
@@ -174,47 +202,86 @@
         <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navMenu">☰</button>
         <ul id="navMenu">
             <li><a href="#features">ฟีเจอร์เด่น</a></li>
+            <li><a href="#guide">คู่มือการใช้งาน</a></li>
             <li><a href="#tech">เทคโนโลยี</a></li>
             <li><a href="#contact">ติดต่อเรา</a></li>
+            <li><a href="https://github.com/sukanyaainchan-creator/inexp-wallet-web/releases/download/v1.1.2%2B6/app-release.apk" class="nav-cta" download>ดาวน์โหลด</a></li>
         </ul>
     </nav>
 
     <header class="hero">
-        <h2>จัดการการเงินอย่างชาญฉลาด<br>ในทุกๆ วัน</h2>
-        <p>แอปพลิเคชันบันทึกรายรับ-รายจ่าย ที่มาพร้อมระบบ AI สแกนสลิปอัตโนมัติ ใช้งานง่าย ดีไซน์ทันสมัย และปลอดภัยสูงสุด</p>
-        <div class="btn-group">
-            <a href="https://github.com/sukanyaainchan-creator/inexp-wallet-web/releases/download/v1.1.2%2B5/app-release.apk"
-               class="btn btn-android" download aria-label="ดาวน์โหลดไฟล์ APK สำหรับ Android">
-                📥 ดาวน์โหลด APK (Android)
-            </a>
+        <div class="hero-inner">
+            <div>
+                <span class="badge">✨ ฟรี • สำหรับ Android</span>
+                <h2>จัดการการเงินอย่างชาญฉลาด<br><span>ในทุกๆ วัน</span></h2>
+                <p class="lead">แอปพลิเคชันบันทึกรายรับ-รายจ่าย ที่มาพร้อมระบบ AI สแกนสลิปอัตโนมัติ ใช้งานง่าย ดีไซน์ทันสมัย และปลอดภัยสูงสุด</p>
+                <div class="btn-group">
+                    <a href="https://github.com/sukanyaainchan-creator/inexp-wallet-web/releases/download/v1.1.2%2B6/app-release.apk"
+                       class="btn btn-android" download aria-label="ดาวน์โหลดไฟล์ APK สำหรับ Android">
+                        📥 ดาวน์โหลด APK (Android)
+                    </a>
+                    <a href="#guide" class="btn btn-ghost">📖 ดูคู่มือการใช้งาน</a>
+                </div>
+                <p class="install-note">⚠️ หากเครื่องแจ้งเตือน "แหล่งที่ไม่รู้จัก" (Unknown sources) ให้อนุญาตเพื่อดำเนินการติดตั้งอย่างปลอดภัย</p>
+            </div>
+            <div class="phone-wrap" aria-hidden="true">
+                <div class="phone">
+                    <div class="screen">
+                        <div class="hi">สวัสดีตอนเย็น 👋</div>
+                        <div class="name">ร่ำรวย</div>
+                        <div class="bal">
+                            <small>ยอดคงเหลือ</small>
+                            <strong>฿12,480</strong>
+                            <div class="row"><div>รายรับ<b>฿20,000</b></div><div>รายจ่าย<b>฿7,520</b></div></div>
+                        </div>
+                        <div class="tx">
+                            <div><span>🍴 อาหาร/เครื่องดื่ม</span><span class="out">-฿80</span></div>
+                            <div><span>🎓 การศึกษา</span><span class="out">-฿350</span></div>
+                            <div><span>💼 เงินเดือน</span><span class="in">+฿20,000</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="install-note">⚠️ หากเครื่องแจ้งเตือน "แหล่งที่ไม่รู้จัก" (Unknown sources) ให้อนุญาตเพื่อดำเนินการติดตั้งอย่างปลอดภัย</p>
     </header>
 
+    <div class="stats reveal">
+        <div class="stat"><b>10-15 วิ</b><span>สแกนสลิปด้วย AI</span></div>
+        <div class="stat"><b>19+</b><span>หมวดหมู่รายจ่าย</span></div>
+        <div class="stat"><b>10+</b><span>หมวดหมู่รายรับ</span></div>
+        <div class="stat"><b>ทุกธนาคาร</b><span>รองรับสลิปโอนเงิน</span></div>
+    </div>
+
     <section id="features">
+        <p class="sec-label">Features</p>
         <h3>ฟีเจอร์ที่ช่วยให้ชีวิตคุณง่ายขึ้น</h3>
         <div class="features">
-            <div class="card">
+            <div class="card reveal">
                 <div class="icon-wrapper">📸</div>
                 <h4>สแกนสลิปด้วย AI</h4>
-                <p>ไม่ต้องพิมพ์ยอดเองให้เมื่อยมือ แค่เลือกรูปสลิปโอนเงิน ระบบจะอ่านยอดเงินและเวลาให้อัตโนมัติ</p>
+                <p>ไม่ต้องพิมพ์ยอดเองให้เมื่อยมือ แค่เลือกรูปสลิปโอนเงิน ระบบจะอ่านยอดเงินและเวลาให้อัตโนมัติ รองรับทุกธนาคาร</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <div class="icon-wrapper">📅</div>
                 <h4>ปฏิทินรายวัน</h4>
-                <p>ดูสรุปยอดรายรับ-รายจ่ายผ่านมุมมองปฏิทินที่ดูง่าย พร้อมสรุปยอดสุทธิรายวันชัดเจน</p>
+                <p>ดูสรุปยอดรายรับ-รายจ่ายผ่านมุมมองปฏิทินที่ดูง่าย พร้อมสรุปยอดสุทธิรายวันชัดเจน และดูรูปสลิปแบบเต็มได้</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
+                <div class="icon-wrapper">🎯</div>
+                <h4>หมวดหมู่และงบประมาณ</h4>
+                <p>ตั้งหมวดหมู่เองได้ พร้อมกำหนดงบประมาณ และเตือนเมื่อใช้จ่ายเกินงบที่ตั้งไว้</p>
+            </div>
+            <div class="card reveal">
                 <div class="icon-wrapper">⏰</div>
                 <h4>แจ้งเตือนรายวัน</h4>
-                <p>ไม่พลาดทุกการบันทึกด้วยระบบแจ้งเตือนตรงเวลา แม้ปิดหน้าจอ พร้อมเสียงเตือนเฉพาะตัวของแอป</p>
+                <p>ไม่พลาดทุกการบันทึกด้วยระบบแจ้งเตือนตรงเวลา ตั้งเวลาเองได้ หรือปิดการแจ้งเตือนได้ตามต้องการ</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <div class="icon-wrapper">🔐</div>
                 <h4>ปลอดภัยด้วย PIN</h4>
-                <p>ล็อกแอปพลิเคชันด้วยรหัส PIN 6 หลัก ปกป้องข้อมูลทางการเงินของคุณไม่ให้ใครแอบดู</p>
+                <p>ล็อกแอปพลิเคชันด้วยรหัส PIN 6 หลัก ปกป้องข้อมูลทางการเงินของคุณไม่ให้ใครแอบดู เปลี่ยน PIN เองได้</p>
             </div>
-            <div class="card">
+            <div class="card reveal">
                 <div class="icon-wrapper">🌙</div>
                 <h4>รองรับโหมดมืด</h4>
                 <p>ถนอมสายตาด้วย Dark Mode ที่ออกแบบมาอย่างสวยงาม สลับใช้งานได้ตลอดเวลา</p>
@@ -222,7 +289,148 @@
         </div>
     </section>
 
-    <section id="tech" style="background: white;">
+    <!-- ===== คู่มือการใช้งาน ===== -->
+    <section id="guide" class="guide-bg">
+        <div class="guide-wrap">
+            <p class="sec-label">User Guide</p>
+            <h3>คู่มือการใช้งานแอป In-Exp Wallet</h3>
+
+            <div class="tabs" role="tablist">
+                <button class="tab active" role="tab" data-target="p1">📲 ติดตั้งแอป (1–5)</button>
+                <button class="tab" role="tab" data-target="p2">👤 สมัครและเข้าสู่ระบบ (6–7)</button>
+                <button class="tab" role="tab" data-target="p3">🚀 เริ่มใช้งาน (8–10)</button>
+            </div>
+
+            <!-- Panel 1 -->
+            <div class="panel active" id="p1">
+                <div class="timeline">
+                    <div class="step reveal">
+                        <div class="num">1</div>
+                        <div class="step-body">
+                            <h4>รับไฟล์ APK มาติดตั้ง</h4>
+                            <p>สแกน <b>QR Code</b> เพื่อรับไฟล์ .apk มาติดตั้งที่โทรศัพท์ หรือกดปุ่มดาวน์โหลดด้านบนของหน้านี้ได้เลย</p>
+                            <div class="shots"><img src="images/step1.png" alt="QR Code สำหรับดาวน์โหลดแอป" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">2</div>
+                        <div class="step-body">
+                            <h4>กดดาวน์โหลดและยืนยัน</h4>
+                            <p>จะขึ้นเป็นหน้าเว็บไซต์ ให้กดปุ่ม <b>ดาวน์โหลด APK (Android)</b> จากนั้นจะมีหน้าต่างให้กดยืนยันที่จะดาวน์โหลดอีกครั้ง</p>
+                            <div class="shots"><img src="images/step2.png" alt="หน้าดาวน์โหลดและยืนยัน" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">3</div>
+                        <div class="step-body">
+                            <h4>เปิดไฟล์ที่ดาวน์โหลด</h4>
+                            <p>เมื่อดาวน์โหลดเสร็จสิ้น ให้กดที่ไฟล์ จะมีหน้าต่างถามว่าจะเปิดด้วยอะไร ให้เลือก <b>"เฉพาะครั้งนี้"</b></p>
+                            <div class="chips"><span class="chip gold">แนะนำ: เฉพาะครั้งนี้</span></div>
+                            <div class="shots"><img src="images/step3.png" alt="เลือกเฉพาะครั้งนี้" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">4</div>
+                        <div class="step-body">
+                            <h4>กดติดตั้ง</h4>
+                            <p>กด <b>ติดตั้ง</b> → แล้วกด <b>ติดตั้งอยู่ดี</b> → กด <b>รายละเอียดเพิ่มเติม</b> → และกด <b>ติดตั้งโดยไม่สแกน</b></p>
+                            <div class="tip">💡 ข้อความเตือนจาก Google Play Protect เกิดขึ้นเพราะแอปติดตั้งนอก Play Store เท่านั้น</div>
+                            <div class="shots"><img src="images/step4.png" alt="ขั้นตอนกดติดตั้ง" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">5</div>
+                        <div class="step-body">
+                            <h4>เปิดแอปครั้งแรก</h4>
+                            <p>เมื่อติดตั้งเสร็จแล้วให้กด <b>เปิด</b> → กด <b>อนุญาต</b> ให้แจ้งเตือน → จะเข้าสู่หน้าเข้าสู่ระบบ ให้กด <b>สมัครสมาชิก</b></p>
+                            <div class="shots"><img src="images/step5.png" alt="เปิดแอปและสมัครสมาชิก" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 2 -->
+            <div class="panel" id="p2">
+                <div class="timeline">
+                    <div class="step reveal">
+                        <div class="num">6</div>
+                        <div class="step-body">
+                            <h4>กรอกข้อมูลสมัครสมาชิก</h4>
+                            <p>ใส่ข้อมูลตามที่แจ้งไว้ ใส่ <b>รหัสผ่าน</b> และตั้ง <b>รหัส PIN 6 หลัก</b> จากนั้นยืนยัน PIN อีกครั้ง (รวม 2 ครั้ง)</p>
+                            <div class="chips"><span class="chip">ข้อมูลเบื้องต้น</span><span class="chip">รหัสผ่าน</span><span class="chip">ตั้ง PIN</span><span class="chip">ยืนยัน PIN</span></div>
+                            <div class="shots"><img src="images/step6.png" alt="กรอกข้อมูลสมัครสมาชิก" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">7</div>
+                        <div class="step-body">
+                            <h4>สมัครสำเร็จ แล้วเข้าสู่ระบบ</h4>
+                            <p>จะขึ้นหน้า <b>สมัครสมาชิกสำเร็จ</b> ให้กด <b>กลับไปหน้า Login</b> แล้วกรอกข้อมูลที่สมัครเข้ามา ใส่รหัสผ่าน และกรอก PIN ก็จะพบกับหน้าหลักทันที</p>
+                            <div class="shots"><img src="images/step7.png" alt="เข้าสู่ระบบ" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel 3 -->
+            <div class="panel" id="p3">
+                <div class="timeline">
+                    <div class="step reveal">
+                        <div class="num">8</div>
+                        <div class="step-body">
+                            <h4>ทำความรู้จักหน้าหลัก</h4>
+                            <p>หน้าหลักแสดง <b>ยอดเงินรวม</b> ทั้งรายวันและรายเดือน กดเปลี่ยนการแสดงผลได้ตรงลูกศรชี้ และแสดงเงินออมต่อเดือน</p>
+                            <div class="chips">
+                                <span class="chip">📅 ปฏิทิน: ดูได้ทั้งรายรับ-รายจ่าย</span>
+                                <span class="chip">📸 เพิ่มข้อมูล: สแกนสลิปได้ทุกธนาคาร (~10-15 วินาที)</span>
+                                <span class="chip">✍️ บันทึกด้วยตัวเองได้</span>
+                                <span class="chip">🗂️ หมวดหมู่: ตั้งเองและเตือนเมื่อเกินงบ</span>
+                            </div>
+                            <div class="tip">💡 สแกนสลิปใช้เวลาประมาณ 10-15 วินาที เพื่อให้ข้อมูลแม่นยำ</div>
+                            <div class="shots"><img src="images/step8.png" alt="หน้าหลักของแอป" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">9</div>
+                        <div class="step-body">
+                            <h4>เพิ่มรายจ่าย / รายรับ</h4>
+                            <p><b>หน้าเพิ่มรายจ่าย</b> มีมากกว่า 19 หมวดหมู่ จดโน้ตเพิ่มเติมได้ และตั้งเวลา-วันที่ได้<br>
+                            <b>หน้าเพิ่มรายรับ</b> มีมากกว่า 10 หมวดหมู่</p>
+                            <div class="tip">⚠️ เมื่อให้ AI สแกนสลิปแล้ว อย่าลืมเลือกหมวดหมู่ก่อนบันทึก</div>
+                            <p style="margin-top:0.8rem">บันทึกเสร็จแล้วจะแสดงที่หน้าหลักและหน้าปฏิทิน ในหน้าปฏิทินสามารถดูรูปภาพแบบเต็มได้ และในหน้าหลักสามารถดูข้อมูลทั้งหมดได้</p>
+                            <div class="shots"><img src="images/step9.png" alt="หน้าเพิ่มรายการ" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                    <div class="step reveal">
+                        <div class="num">10</div>
+                        <div class="step-body">
+                            <h4>ตั้งค่าระบบ</h4>
+                            <p>ในหน้าตั้งค่าคุณสามารถ:</p>
+                            <div class="chips">
+                                <span class="chip">🖼️ เปลี่ยนรูปโปรไฟล์</span>
+                                <span class="chip">⏰ ตั้งเวลาแจ้งเตือน / ปิดได้</span>
+                                <span class="chip">🔑 เปลี่ยนรหัส PIN เอง</span>
+                                <span class="chip">🌙 ปรับเป็นธีมมืด</span>
+                            </div>
+                            <div class="tip">🔒 การเปลี่ยนอีเมลและชื่อผู้ใช้ ต้องแจ้งผ่าน Admin เท่านั้น เพื่อความปลอดภัย</div>
+                            <div class="shots"><img src="images/step10.png" alt="หน้าตั้งค่า" onerror="this.style.display='none'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="help-box reveal">
+                <div>
+                    <h4>ติดปัญหาระหว่างติดตั้งหรือใช้งาน?</h4>
+                    <p>ทักแอดมินผ่าน LINE Official ได้เลย ยินดีช่วยเหลือ</p>
+                </div>
+                <a href="#contact" class="btn btn-android">💬 ติดต่อแอดมิน</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech">
+        <p class="sec-label">Technology</p>
         <h3>ขับเคลื่อนด้วยเทคโนโลยีสมัยใหม่</h3>
         <div class="tech-stack">
             <p>แอปพลิเคชันถูกพัฒนาและออกแบบสถาปัตยกรรมระบบอย่างพิถีพิถัน เพื่อประสิทธิภาพการทำงานและความปลอดภัยของข้อมูลสูงสุด</p>
@@ -251,8 +459,10 @@
         <p style="font-size: 0.8rem; margin-top: 2rem; color: #64748B;">&copy; 2026 IN-EXP WALLET. All rights reserved.</p>
     </footer>
 
+    <div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
     <script>
-        // Mobile nav toggle
+        // Mobile nav
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
         navToggle.addEventListener('click', () => {
@@ -265,6 +475,33 @@
                 navToggle.setAttribute('aria-expanded', 'false');
             });
         });
+
+        // Guide tabs
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.panel');
+        tabs.forEach(tab => tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            const panel = document.getElementById(tab.dataset.target);
+            panel.classList.add('active');
+            panel.querySelectorAll('.reveal').forEach(el => el.classList.add('show'));
+        }));
+
+        // Scroll reveal
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Lightbox for screenshots
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightboxImg');
+        document.querySelectorAll('.shots img').forEach(img => img.addEventListener('click', () => {
+            lbImg.src = img.src; lb.classList.add('open');
+        }));
+        lb.addEventListener('click', () => lb.classList.remove('open'));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
     </script>
 
 </body>
